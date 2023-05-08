@@ -9,7 +9,7 @@ public class Main
         PrintStream console = new PrintStream(new File("output.txt"));
         System.setOut(console);
 
-        Tree tree = new Tree("input.txt");
+        Tree tree = new Tree("src/input.txt");
         tree.toStringg();
         console.close();
     }
@@ -38,7 +38,7 @@ class Tree
     public Tree(String file) throws FileNotFoundException
     {
         //reads file
-        Scanner scan = new Scanner(new File("input.txt"));
+        Scanner scan = new Scanner(new File("src/input.txt"));
 
         //runs as long as theres a next line
         while(scan.hasNextLine())
@@ -69,6 +69,22 @@ class Tree
         }
     }
 
+    private Node search(Node root, int key) 
+    {
+        if(root == null || root.data == key)
+        {
+            return root;
+        }
+        else if(key < root.data)
+        {
+            return search(root.left, key);
+        }
+        else //if(key > root.data)
+        {
+            return search(root.right, key);
+        }
+    }
+
     private Node deleting(Node root, int key) {
         if(root==null)
         {
@@ -78,7 +94,7 @@ class Tree
         {
             deleting(root.left, key);
         }
-        else if(key > root.data)
+        else if(root.data < key)
         {
             deleting(root.right, key);
         }
@@ -111,22 +127,6 @@ class Tree
         return min;
     }
 
-    private Node search(Node root, int key) 
-    {
-        if(root == null || root.data == key)
-        {
-            return root;
-        }
-        else if(key < root.data)
-        {
-            return search(root.left, key);
-        }
-        else //if(key > root.data)
-        {
-            return search(root.right, key);
-        }
-    }
-
     // INSERT SECTION ======================================================
     private Node insert(Node root, int key)
     {
@@ -135,11 +135,11 @@ class Tree
             root = new Node(key);
             return root;
         }
-        else if (key<root.data)
+        else if (key < root.data)
         {
             root.left = insert(root.left, key);
         }
-        else if(root.data<key)
+        else if(root.data < key)
         {
             root.right = insert(root.left, key);
         }
