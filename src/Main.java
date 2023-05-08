@@ -1,8 +1,6 @@
 import java.io.*;
 import java.util.*;
 
-import javax.lang.model.util.ElementScanner14;
-
 public class Main
 {
     public static void main(String[] args) throws Exception 
@@ -191,12 +189,41 @@ class Tree
 
     private void printLevel(Node root, int level)
     {
-
+        if(root == null)
+        {
+            System.out.print("");
+            return;
+        }
+        else if(level == 1)
+        {
+            System.out.print(root.data + " ");
+        }
+        else if(level > 1)
+        {
+            printLevel(root.left, level-1);
+            printLevel(root.right, level-1);
+        }
     }
 
     private int maxDepth(Node root)
     {
-        return 0;
+        if(root == null)
+        {
+            return -1;
+        }
+        else 
+        {
+            int leftDepth = maxDepth(root.left);
+            int rightDepth = maxDepth(root.right);
+            if(leftDepth > rightDepth)
+            {
+                return leftDepth+1;
+            }
+            else
+            {
+                return rightDepth+1;
+            }
+        }
     }
 }
 
