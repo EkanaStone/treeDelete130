@@ -79,7 +79,7 @@ class Tree
         {
             return search(root.left, key);
         }
-        else //if(key > root.data)
+        else //if(root.data < key)
         {
             return search(root.right, key);
         }
@@ -92,11 +92,11 @@ class Tree
         }
         else if(key < root.data)
         {
-            deleting(root.left, key);
+            root.left = deleting(root.left, key);
         }
         else if(root.data < key)
         {
-            deleting(root.right, key);
+            root.right = deleting(root.right, key);
         }
         else 
         {
@@ -117,7 +117,7 @@ class Tree
 
     private int minValue(Node right) 
     {
-        int min = right.data;
+        int min = root.data;
 
         while(root.left != null)
         {
@@ -141,7 +141,7 @@ class Tree
         }
         else if(root.data < key)
         {
-            root.right = insert(root.left, key);
+            root.right = insert(root.right, key);
         }
         return root;
     }
@@ -149,31 +149,31 @@ class Tree
     // PRINT SECTION =======================================================
     public void toStringg()
     {
-        System.out.println("Unordered Tree: ");
-        unordered(root);
-        System.out.println("\n\nOrdered Tree");
-        ordered(root);
-        System.out.println("\n\nTree by level");
+        System.out.println("Tree Preorder: ");
+        preorder(root);
+        System.out.println("\n\nTree Inorder: ");
+        inorder(root);
+        System.out.println("\n\nTree by level: ");
         level(root);
     }
 
-    private void unordered(Node root)
+    private void preorder(Node root)
     {
         if(root != null)
         {
             System.out.print(root.data + " ");
-            unordered(root.left);
-            unordered(root.right);
+            preorder(root.left);
+            preorder(root.right);
         }
     }
 
-    private void ordered(Node root)
+    private void inorder(Node root)
     {
         if(root != null )
         {
-            ordered(root.left);
+            inorder(root.left);
             System.out.print(root.data + " ");
-            ordered(root.right);
+            inorder(root.right);
         }
     }
 

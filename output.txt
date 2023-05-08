@@ -1,0 +1,10 @@
+Tree Preorder: 
+5 3 2 4 7 6 
+
+Tree Inorder: 
+2 3 4 5 6 7 
+
+Tree by level: 
+5 
+3 7 
+2 4 6 
